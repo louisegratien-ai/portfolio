@@ -103,6 +103,46 @@ header img{
     display: none;
 }
 
+.js .burger{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 44px;
+    width: 44px;
+    margin-left: auto;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+}
+
+.js .burger span{
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: var(--blanc);
+    border-radius: 20px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.js .burger[aria-expanded="false"] ~ nav, .js .burger[aria-expanded="false"] ~ .mode{
+    display: none;
+}
+
+.js .burger[aria-expanded="true"] span:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+}
+
+.js .burger[aria-expanded="true"] span:nth-child(2){
+    opacity: 0;
+}
+
+.js .burger[aria-expanded="true"] span:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
 header nav{
     flex-basis: 100%;
 }
@@ -746,6 +786,17 @@ version ordinateur
         justify-content: space-between;
         align-items: center;
         padding: 24px 40px;
+    }
+    .js .burger{
+        display: none;
+    }
+
+    .js .burger[aria-expanded="false"] ~ nav{
+        display: block;
+    }
+
+    .js .burger[aria-expanded="false"] ~ .mode{
+        display: flex;
     }
 }
 
