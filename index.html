@@ -2,259 +2,146 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Louise Gratien</title>
+    <title>Louise Gratien – Développeuse web</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="javascript/script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Redaction+35:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <meta name="description" content="portfolio étudiante en développement web">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Portfolio de Louise Gratien, développeuse web en formation à Rouen, à la recherche d'une alternance.">
 </head>
 <body>
 <header>
     <a href="index.html">
-        <img src="image/logotete.jpg" alt="retour présentation" id="logo">
+        <img src="image/logotete.jpg" alt="Louise Gratien, accueil">
     </a>
-    <nav>
-        <ul>
+    <button type="button" class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav aria-label="Navigation principale">
+        <ul id="menu">
             <li>
-                <a href="#pres" class="bouton">
-                    présentation
-                </a>
+                <a href="index.html" aria-current="page">Accueil</a>
             </li>
             <li>
-                <a href="#projet" class="bouton">
-                    Projets
-                </a>
+                <a href="pages/projets.html">Projets</a>
             </li>
             <li>
-                <a href="#form" class="bouton">
-                    contact
-                </a>
+                <a href="pages/parcours.html">Parcours</a>
+            </li>
+            <li>
+                <a href="pages/contact.html">Contact</a>
             </li>
         </ul>
     </nav>
-    <ul>
-        <li>
-            <a href="https://www.linkedin.com/in/louise-gratien">
-                <img src="image/linkedin-logo.png" alt="linkedin">
-            </a>
-        </li>
-        <li>
-            <a href="mailto:louise.gratien@gmail.com">
-                <img src="image/gmail-logo.png" alt="contact mail">
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/louisegratien-ai">
-                <img src="image/git-logo.png" alt="github">
-            </a>
-        </li>
-    </ul>
+    <div class="mode">
+        <button>
+            mode sombre
+        </button>
+        <button>
+            EN
+        </button>
+    </div>
 </header>
 <main>
-    <section id="pres">
+    <section id="hero">
+        <p class="badge">Disponible pour une alternance</p>
         <h1>Louise Gratien</h1>
-        <h2>développeuse web en formation - Rouen</h2>
-        <div>
-            <a class="bouton" href="#projet">Projet</a>
-            <a class="bouton" href="#form">Contact</a>
-        </div>
+        <p class="typing">développeuse web back-end en formation · Rouen</p>
+        <a href="pages/projets.html">Voir mes projets</a>
+        <a href="https://louisegratien-ai.github.io/cv/">Mon CV</a>
     </section>
-    <section id="desc">
-        <h2>Qui suis-je</h2>
-        <div class="who">
-            <img src="image/logotete.jpg" alt="photo de Louise Gratien">
-            <div class="info">
-                <p>Passionnée d'informatique et de nouvelles technologies depuis toujours, j'ai d'abord suivi un
-                    parcours tourné vers l'humain (psychologie, soins infirmiers) avant de me reconvertir dans le
-                    développement web. Aujourd'hui en formation chez Need For School à Rouen, je m'oriente vers le
-                    <strong>back-end</strong>, en gardant ce que ces expériences m'ont appris : l'écoute, le travail
-                    en équipe et l'envie de construire des choses utiles.</p>
-                <p>En dehors du code, je fais du <strong>théâtre d'improvisation</strong> depuis 2020 avec
-                    l'association La Ruche, et je suis <strong>bénévole</strong> au SAMU social de la Croix-Rouge.</p>
-                <ul>
-                    <li class="pastille">passionnée</li>
-                    <li class="pastille">engagée</li>
-                    <li class="pastille">ciment d'équipe</li>
-                </ul>
-                <a class="bouton" href="">Mon CV</a>
+    <section id="pres">
+        <h2>À propos</h2>
+        <div class="bento">
+            <div class="case apparition">
+                <img src="image/logotete.jpg" alt="Photo de Louise Gratien">
+                <h3>Hello world, moi c'est Louise</h3>
+                <p>Reconvertie après la psycho et les soins infirmiers, je construis du back-end en PHP avec la même
+                    envie : des choses utiles, pour de vraies personnes.</p>
             </div>
-        </div>
-        <div class="blocs">
-            <div class="bloc">
-                <h3>Mon parcours</h3>
-                <ol class="parcours">
-                    <li>
-                        <time datetime="2020">2020</time>
-                        <p>Baccalauréat scientifique, Évreux</p>
-                    </li>
-                    <li>
-                        <time datetime="2020">2020</time> – <time datetime="2022">2022</time>
-                        <p>Licence de psychologie, Université de Rouen</p>
-                    </li>
-                    <li>
-                        <time datetime="2023">2023</time> – <time datetime="2024">2024</time>
-                        <p>École d'infirmière, IFSI Croix-Rouge</p>
-                    </li>
-                    <li>
-                        depuis <time datetime="2025-09">2025</time>
-                        <p>Formation développement web, Need For School</p>
-                    </li>
-                </ol>
-            </div>
-            <div class="bloc">
-                <h3>Ce que je recherche</h3>
-                <ul class="recherche">
-                    <li><strong>Alternance</strong> en développement web, de préférence back-end</li>
-                    <li><strong>Rythme :</strong> 3 semaines en entreprise / 1 semaine en formation</li>
-                    <li><strong>Durée :</strong> 1 à 2 ans, disponible dès maintenant</li>
-                    <li class="secteur">
-                        <strong>Secteur :</strong>
-                        <span class="pastille">Rouen</span>
-                        <span class="pastille">Elbeuf</span>
-                    </li>
-                    <li><strong>Environnement :</strong> agence web ou startup</li>
+            <div class="case apparition">
+                <h3>Stack</h3>
+                <ul class="tags">
+                    <li class="pastille">HTML</li>
+                    <li class="pastille">CSS</li>
+                    <li class="pastille">Javascript</li>
+                    <li class="pastille">PHP</li>
+                    <li class="pastille">MySQL</li>
+                    <li class="pastille">Symfony</li>
+                    <li class="pastille">React.js</li>
+                    <li class="pastille">Git</li>
                 </ul>
             </div>
+            <div class="case apparition">
+                <h3>Rythme</h3>
+                <p><strong>3 sem. entreprise / 1 sem. école</strong></p>
+            </div>
+            <div class="case apparition">
+                <h3>Mobilité</h3>
+                <p><strong>Rouen, Elbeuf</strong></p>
+            </div>
+            <div class="case apparition">
+                <h3>Fun fact</h3>
+                <p>Admin d'un serveur Minecraft moddé, et théâtre d'impro depuis 2020</p>
+            </div>
+            <div class="case apparition">
+                <h3>En ce moment</h3>
+                <p>Je monte en compétences sur Symfony et React.</p>
+            </div>
         </div>
     </section>
-    <section id="projet">
-        <h2>Projets</h2>
-        <div class="cards">
-            <article class="card">
-                <p class="new pastille">nouveau !</p>
-                <img src="" alt="">
-                <h3>
-                    portfolio
-                </h3>
-                <p>
-                    Il s'agit du projet sur lequel vous vous trouvez. Il a pour but de me présenter.
-                </p>
-                <div class="tags">
-                    <p class="pastille">
-                        HTML
-                    </p>
-                    <p class="pastille">
-                        CSS
-                    </p>
-                </div>
-                <a href="#" class="bouton">
-                    cliquez
-                </a>
-            </article>
-            <article class="card">
-                <img src="image/logobde404.jpg" alt="logo projet bde404">
-                <h3>
-                    BDE404
-                </h3>
-                <p>
-                    Projet de site pour le BDE de notre école fait pendant un projet de groupe.
-                </p>
-                <div class="tags">
-                    <p class="pastille">
-                        PHP
-                    </p>
-                    <p class="pastille">
-                        Mobile first
-                    </p>
-                </div>
-                <a href="https://github.com/SAGNIERTheo/ERROR404/tree/main" class="bouton">
-                    cliquez
-                </a>
-            </article>
-        </div>
-    </section>
-    <section id="comp">
-        <h2>Compétences</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>compétences</th>
-                <th>niveau</th>
-                <th>date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>html, css</td>
-                <td>
-                    <span class="point plein"></span><span class="point plein"></span><span class="point plein"></span><span class="point plein"></span><span class="point"></span>
-                    <span class="hide">4/5</span>
-                </td>
-                <td> 2025 </td>
-            </tr>
-            <tr>
-                <td> javascript </td>
-                <td>
-                    <span class="point plein"></span><span class="point plein"></span><span class="point"></span><span class="point"></span><span class="point"></span>
-                    <span class="hide">2/5</span>
-                </td>
-                <td>2026</td>
-            </tr>
-            <tr>
-                <td> php </td>
-                <td>
-                    <span class="point plein"></span><span class="point plein"></span><span class="point plein"></span><span class="point"></span><span class="point"></span>
-                    <span class="hide">3/5</span>
-                </td>
-                <td>2026</td>
-            </tr>
-            <tr>
-                <td> responsive</td>
-                <td>
-                    <span class="point plein"></span><span class="point plein"></span><span class="point plein"></span><span class="point plein"></span><span class="point"></span>
-                    <span class="hide">4/5</span>
-                </td>
-                <td> 2025 </td>
-            </tr>
-            </tbody>
-        </table>
-
-    </section>
-    <section id="form">
-        <div class="texte">
-            <h2>formulaire de contact</h2>
-            <p>écrivez-moi</p>
-            <ul>
-                <li>louise.gratien@gmail.com</li>
-                <li>github.com/louisegratien-ai</li>
-                <li>linkedin.com/in/louise-gratien</li>
+    <section id="projets">
+        <h2>Projets à la une</h2>
+        <article class="card apparition">
+            <h3><a href="https://github.com/louisegratien-ai/mvc-php-produit">Mini-framework MVC en PHP</a></h3>
+            <p>Routeur GET/POST, injection de dépendances, autoloader PSR-4 maison, PDO en requêtes préparées, CRUD
+                produits.</p>
+            <ul class="tags">
+                <li class="pastille">PHP 8</li>
+                <li class="pastille">MySQL</li>
+                <li class="pastille">PDO</li>
             </ul>
-        </div>
-        <form action="" method="get">
-            <label for="nom">nom :</label>
-            <input type="text" id="nom" name="nom" required>
-            <label for="prenom">prénom :</label>
-            <input type="text" id="prenom" name="prenom" required>
-            <label for="mail">email :</label>
-            <input type="email"  id="mail" name="mail" required>
-            <label for="sujet"> sujet : </label>
-            <select id="sujet" name="sujet" required>
-                <option value="">choisissez</option>
-                <option>offre alternance</option>
-                <option> question </option>
-            </select>
-            <label for="message"> message : </label>
-            <textarea id="message" name="message" required></textarea>
-            <div class="check">
-                <input type="checkbox" id="condition" required>
-                <label for="condition"> j'accepte les <a href="#">conditions </a> </label>
-            </div>
-            <button class="bouton">envoyer</button>
-        </form>
+        </article>
+        <article class="card apparition">
+            <h3><a href="https://github.com/SAGNIERTheo/ERROR404">BDE404</a></h3>
+            <p>Projet de groupe : site du bureau des étudiants de Need For School.</p>
+            <ul class="tags">
+                <li class="pastille">PHP</li>
+                <li class="pastille">Mobile first</li>
+            </ul>
+        </article>
+        <article class="card apparition">
+            <h3><a href="https://github.com/louisegratien-ai/cv">CV en HTML/CSS</a></h3>
+            <p>Mon CV codé à la main : mobile first, imprimable en A4, lisible par les ATS.</p>
+            <ul class="tags">
+                <li class="pastille">HTML</li>
+                <li class="pastille">CSS</li>
+                <li class="pastille">A4</li>
+            </ul>
+        </article>
+        <a href="pages/projets.html">Tous les projets</a>
+    </section>
+    <section id="contact">
+        <h2>Une alternance à proposer ?</h2>
+        <p>Rythme 3/1, disponible dès maintenant.</p>
+        <a href="pages/contact.html">Me contacter</a>
     </section>
 </main>
-<footer >
-    <p>© 2026 Gratien</p>
-    <div class="mention">
-        <ul>
-            <li><a href="">mentions légales</a></li>
-            <li><a href="https://github.com/louisegratien-ai">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/louise-gratien">LinkedIn</a></li>
-        </ul>
-    </div>
+<footer>
+    <p>© 2026 Louise Gratien</p>
+    <ul>
+        <li><a href="https://github.com/louisegratien-ai">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/louise-gratien">LinkedIn</a></li>
+        <li><button type="button" class="terminal">Terminal secret</button></li>
+        <li><a href="pages/mentions-legales.html">Mentions légales</a></li>
+    </ul>
 </footer>
 
 </body>
+
+
 </html>
