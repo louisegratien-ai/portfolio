@@ -1,20 +1,40 @@
 const burger = document.querySelector(".burger");
 const theme = document.querySelector("#theme");
 const html = document.documentElement;
+const boutonLangue = document.querySelector("#langue");
 
 function fermerMenu() {
     burger.setAttribute("aria-expanded", "false");
-    burger.setAttribute("aria-label", "Ouvrir le menu");
-};
+    burger.setAttribute("data-trad-label", "menu-ouvrir");
+    traduire(html.getAttribute("lang"));
+}
 
 function themeSombre() {
     html.classList.add("sombre");
-    theme.textContent = "mode clair";
+    theme.setAttribute("data-trad", "theme-clair");
+    traduire(html.getAttribute("lang"));
 }
 
 function themeClair() {
     html.classList.remove("sombre");
-    theme.textContent = "mode sombre";
+    theme.setAttribute("data-trad", "theme-sombre");
+    traduire(html.getAttribute("lang"));
+}
+
+function traduire(langue) {
+    document.querySelectorAll("[data-trad]").forEach(function (trad) {
+        const cle = trad.getAttribute("data-trad");
+        trad.textContent = traductions[langue][cle];
+    });
+    // les textes cachés dans les attributs : même principe, mais avec setAttribute
+    document.querySelectorAll("[data-trad-label]").forEach(function (trad) {
+        const cle = trad.getAttribute("data-trad-label");
+        trad.setAttribute("aria-label", traductions[langue][cle]);
+    });
+    document.querySelectorAll("[data-trad-alt]").forEach(function (trad) {
+        const cle = trad.getAttribute("data-trad-alt");
+        trad.setAttribute("alt", traductions[langue][cle]);
+    });
 }
 
 if (html.classList.contains("sombre")) {
@@ -27,7 +47,8 @@ burger.addEventListener("click", function menuBurger() {
         burger.focus();
     } else {
         burger.setAttribute("aria-expanded", "true");
-        burger.setAttribute("aria-label", "Fermer le menu");
+        burger.setAttribute("data-trad-label", "menu-fermer");
+        traduire(html.getAttribute("lang"));
     }
 });
 
@@ -48,4 +69,31 @@ theme.addEventListener("click", function themeChange() {
     }
 });
 
+function langueAnglais() {
+    traduire("en");
+    html.setAttribute("lang", "en");
+    boutonLangue.textContent = "français";
+    boutonLangue.setAttribute("lang", "fr");
+    localStorage.setItem("langue", "en");
+}
 
+function langueFrancais() {
+    traduire("fr");
+    html.setAttribute("lang", "fr");
+    boutonLangue.textContent = "english";
+    boutonLangue.setAttribute("lang", "en");
+    localStorage.setItem("langue", "fr");
+}
+
+if (localStorage.getItem("langue") === "en") {
+    langueAnglais();
+    html.classList.remove("traduction-en-cours");
+}
+
+boutonLangue.addEventListener("click", function langueChange() {
+    if (html.getAttribute("lang") === "fr") {
+        langueAnglais();
+    } else {
+        langueFrancais();
+    }
+});

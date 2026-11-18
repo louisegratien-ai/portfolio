@@ -24,6 +24,10 @@ initialisation
     color-scheme: dark;
 }
 
+.traduction-en-cours body{
+    visibility: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
