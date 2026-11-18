@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact – Louise Gratien</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../javascript/head.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Contacter Louise Gratien pour une alternance en développement web à Rouen ou Elbeuf.">
+</head>
+<body>
+<header>
+    <a href="../index.html">
+        <img src="../image/logotete.jpg" alt="Louise Gratien, accueil" data-trad-alt="alt-logo">
+    </a>
+    <button type="button" class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu" data-trad-label="menu-ouvrir">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav aria-label="Navigation principale" data-trad-label="label-nav">
+        <ul id="menu">
+            <li>
+                <a href="../index.html" data-trad="nav-accueil">Accueil</a>
+            </li>
+            <li>
+                <a href="projets.html" data-trad="nav-projets">Projets</a>
+            </li>
+            <li>
+                <a href="parcours.html" data-trad="nav-parcours">Parcours</a>
+            </li>
+            <li>
+                <a href="contact.html" aria-current="page">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="mode">
+        <button id="theme" type="button" data-trad="theme-sombre">
+            mode sombre
+        </button>
+        <button id="langue" type="button" lang="en">
+            english
+        </button>
+    </div>
+</header>
+<main>
+    <section id="contact-link">
+        <h1>Contact</h1>
+        <p data-trad="contact-intro">Une alternance, une question, un projet ? Écrivez-moi.</p>
+        <div class="case">
+            <h2 data-trad="contact-joindre">Me joindre</h2>
+            <ul>
+                <li><a href="mailto:louise.gratien@gmail.com">louise.gratien@gmail.com</a></li>
+                <li><a href="https://www.linkedin.com/in/louise-gratien">linkedin.com/in/louise-gratien</a></li>
+                <li><a href="https://github.com/louisegratien-ai">github.com/louisegratien-ai</a></li>
+            </ul>
+            <h2 data-trad="commun-mobilite">Mobilité</h2>
+            <p>Rouen, Elbeuf</p>
+        </div>
+    </section>
+    <section id="form">
+        <h2 data-trad="contact-formulaire">Formulaire de contact</h2>
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="5bd1227d-4efe-4cea-b9b5-b3d443372e32">
+            <input type="hidden" name="from_name" value="portfolio Louise Gratien">
+            <input type="checkbox" name="botcheck" class="botcheck">
+            <label for="nom" data-trad="contact-nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+            <label for="prenom" data-trad="contact-prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+            <label for="mail" data-trad="contact-email">Email :</label>
+            <input type="email" id="mail" name="email" required>
+            <label for="sujet" data-trad="contact-sujet">Sujet :</label>
+            <select id="sujet" name="subject" required>
+                <option value="" data-trad="contact-choisir">Choisissez un sujet</option>
+                <option value="Offre d'alternance" data-trad="contact-offre">Offre d'alternance</option>
+                <option value="Question">Question</option>
+                <option value="Demande de site" data-trad="contact-demande-site">Demande de site</option>
+            </select>
+            <label for="message" data-trad="contact-message">Message :</label>
+            <textarea id="message" name="message" minlength="10" maxlength="1000" aria-describedby="compteur" required></textarea>
+            <p id="compteur">0 / 1000 caractères</p>
+            <div class="check">
+                <input type="checkbox" id="condition" required>
+                <label for="condition" data-trad="contact-accord">J'accepte que mes données servent à me recontacter</label>
+            </div>
+            <button class="bouton" data-trad="contact-envoyer">Envoyer</button>
+        </form>
+    </section>
+</main>
+<footer>
+    <p>© 2026 Louise Gratien</p>
+    <ul>
+        <li><a href="https://github.com/louisegratien-ai">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/louise-gratien">LinkedIn</a></li>
+        <li><button type="button" class="terminal" data-trad="footer-terminal">Terminal secret</button></li>
+        <li><a href="mentions-legales.html" data-trad="footer-mentions">Mentions légales</a></li>
+    </ul>
+</footer>
+<script src="../javascript/traductions.js"></script>
+<script src="../javascript/script.js" ></script>
+</body>
+
+
+</html>

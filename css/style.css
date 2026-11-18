@@ -3,16 +3,34 @@ initialisation
  */
 :root{
     /* noir et blanc */
-    --noir: #1F0A1B;
-    --blanc : #f7f5f2;
+    --noir : #241b30;
+    --blanc : #fcf8f8;
     /* les 3 couleurs */
-    --style: #942F3C;   /* bordeaux : header, pastilles, déco */
-    --text: #6EE89A;    /* vert : tout le texte */
-    --bouton : #2f4f94; /* bleu : boutons */
-    --title : "Playfair Display" ;
-    --font: "Redaction 35";
+    --style : #4a2c7a;   /* violet */
+    --deco : #ff6b5b;    /* corail : déco uniquement, jamais pour du texte sur fond clair */
+    --clair : #ece6f6;   /* lavande */
+    /* les polices */
+    --title: "Space Grotesk", sans-serif;
+    --code: "JetBrains Mono", monospace;
+    --font: "Segoe UI", sans-serif;
 }
 
+/* mode sombre : classe posée sur <html> par head.js et script.js
+   les couleurs sont inversées : --blanc devient foncé et --noir devient clair */
+.sombre {
+    --blanc : #1a1325;
+    --noir : #ede7f6;
+    --style : #c3a9f0;
+    --clair : #2d2140;
+    color-scheme: dark;
+}
+
+/* version anglaise : page cachée le temps que script.js la traduise (classe posée par head.js) */
+.traduction-en-cours body{
+    visibility: hidden;
+}
+
+/* reset : plus de marges par défaut du navigateur, et box-sizing pour que padding et bordure restent dans la largeur */
 * {
     margin: 0;
     padding: 0;
@@ -20,9 +38,15 @@ initialisation
     /*outline: 1px solid red;*/
 }
 
+/* défilement doux quand on clique sur un lien vers une ancre */
+html{
+    scroll-behavior: smooth;
+}
+
+/* toutes les couleurs passent par les variables : c'est ce qui permet au mode sombre de tout changer d'un coup */
 body{
-    background : var(--noir);
-    color: var(--text);
+    background: var(--blanc);
+    color: var(--noir);
     font-family: var(--font);
     font-size: 16px;
     line-height: 1.6;
@@ -30,28 +54,37 @@ body{
 
 h1, h2, h3 {
     font-family: var(--title);
+    line-height: 1.2;
 }
 
-h1{
-    font-size: 48px;
+/* pas de puces : les listes servent à la structure (menu, pastilles, frise), le style est fait à la main */
+ul, ol{
+    list-style: none;
 }
 
-h2{
-    font-size: 32px;
-    margin-bottom: 24px;
+/* une image ne dépasse jamais de son conteneur */
+img{
+    display: block;
+    max-width: 100%;
 }
 
-section{
-    padding: 48px 40px;
+a{
+    color: var(--style);
 }
 
-/* contour visible quand on navigue au clavier */
+/* les champs et les boutons prennent la police et la couleur du site (le navigateur leur en met d'autres par défaut) */
+button, input, select, textarea{
+    font: inherit;
+    color: inherit;
+}
+
+/* contour bien visible pour la navigation au clavier (seulement au clavier, pas au clic) */
 :focus-visible{
-    outline: 3px solid var(--text);
+    outline: 3px solid var(--deco);
     outline-offset: 3px;
 }
 
-/* texte lu par les lecteurs d'écran mais caché à l'écran */
+/* caché à l'écran mais toujours lu par les lecteurs d'écran */
 .hide{
     position: absolute;
     width: 1px;
@@ -60,430 +93,827 @@ section{
     clip: rect(0 0 0 0);
     white-space: nowrap;
 }
+
 /*
-header/footer
+fin initialisation
+
+debut header
  */
-footer, header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 40px;
-    background: var(--style);
-}
 
-footer{
-    margin-top: 48px;
-}
-
+/* bandeau violet qui reste collé en haut pendant le scroll */
 header{
     position: sticky;
     top: 0;
-    z-index: 2;
-}
-
-#logo{
-    width: 70px;
-    height: 70px;
-    border-radius: 100%;
-}
-
-header a img{
-    width: 50px;
-    height: 100%;
-}
-
-header ul{
-    list-style: none;
+    z-index: 10;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--style);
+    color: var(--blanc);
+    border-radius: 0 0 24px 24px;
+}
+
+/* photo ronde, recadrée sans être déformée (object-fit) */
+header img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--blanc);
+}
+
+/* burger : caché sans JS (le menu reste alors affiché), visible seulement avec la classe js */
+.burger{
+    display: none;
+}
+
+/* 44px : taille minimum confortable pour un doigt */
+.js .burger{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 20px;
-}
-
-footer ul{
-    list-style: none;
-    display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
+    height: 44px;
+    width: 44px;
+    margin-left: auto;
+    background: transparent;
+    cursor: pointer;
+    border: none;
 }
 
-footer a{
-    color: var(--text);
+/* les 3 barres du burger */
+.js .burger span{
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: var(--blanc);
+    border-radius: 20px;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
-.bouton{
+/* menu fermé : on cache la nav et les boutons qui suivent le burger (~) */
+.js .burger[aria-expanded="false"] ~ nav, .js .burger[aria-expanded="false"] ~ .mode{
+    display: none;
+}
+
+/* menu ouvert : les 3 barres forment une croix (8px = hauteur d'une barre + gap) */
+.js .burger[aria-expanded="true"] span:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+}
+
+.js .burger[aria-expanded="true"] span:nth-child(2){
+    opacity: 0;
+}
+
+.js .burger[aria-expanded="true"] span:nth-child(3){
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* sur mobile, la nav passe à la ligne sous le logo et prend toute la largeur */
+header nav{
+    flex-basis: 100%;
+}
+
+header nav ul{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+header nav a{
+    display: block;
+    padding: 8px 0;
+    color: var(--blanc);
+    font-family: var(--title);
+    font-size: 22px;
     text-decoration: none;
-    font-size: 20px;
-    color: var(--text);
-    background: var(--bouton);
-    border-radius: 50px;
-    padding: 15px 20px;
-    text-align: center;
+}
+
+/* la page actuelle (aria-current) et le survol sont soulignés en corail */
+header nav a[aria-current="page"], header nav a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--deco);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+}
+
+.mode{
+    display: flex;
+    gap: 8px;
+    padding-bottom: 8px;
+}
+
+/* boutons mode sombre et langue, en pilule */
+.mode button{
+    min-height: 44px;
+    padding: 0 16px;
+    background: transparent;
+    border: 2px solid var(--blanc);
+    border-radius: 999px;
+    color: var(--blanc);
+    font-size: 14px;
+    cursor: pointer;
     transition: background 0.3s, color 0.3s;
 }
 
-.bouton:hover{
-    background: var(--text);
+.mode button:hover{
+    background: var(--blanc);
+    color: var(--style);
+}
+
+/*
+fin header
+
+debut footer
+ */
+
+footer{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 48px;
+    padding: 24px 20px;
+    background: var(--clair);
+    color: var(--noir);
+    font-size: 14px;
+}
+
+footer ul{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+}
+
+footer a, .terminal{
+    color: var(--noir);
+}
+
+/* le bouton du terminal secret ressemble aux liens du footer */
+.terminal{
+    padding: 0;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*
+fin footer
+
+debut commun
+ */
+
+/* contenu centré, 1100px maximum sur grand écran */
+main{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section{
+    padding: 32px 0;
+}
+
+h1{
+    color: var(--style);
+    font-size: 40px;
+}
+
+/* curseur corail qui clignote après le titre, façon terminal */
+h1::after{
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 4px;
+    margin-left: 4px;
+    background: var(--deco);
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50%{
+        opacity: 0;
+    }
+}
+
+h1 + p{
+    margin-top: 12px;
+}
+
+/* titres de section façon code : police mono, minuscules, précédés de « // » */
+h2{
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--clair);
+    color: var(--style);
+    font-family: var(--code);
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: lowercase;
+}
+
+h2::before{
+    content: "// ";
+    color: var(--deco);
+}
+
+h3{
+    font-size: 18px;
+}
+
+/* boutons pilule, 44px de haut minimum pour le doigt */
+.bouton, #hero a, #contact a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 22px;
+    background: var(--style);
+    border: 2px solid var(--style);
+    border-radius: 999px;
+    color: var(--blanc);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* au survol, fond corail : en mode clair le texte --noir est bien lisible, en mode sombre --noir devient clair et le contraste est trop faible (à corriger) */
+.bouton:hover, #hero a:hover, #contact a:hover{
+    background: var(--deco);
+    border-color: var(--deco);
+    color: var(--noir);
+}
+
+/* étiquette « disponible » avec un point corail qui pulse */
+.badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px;
+    background: var(--clair);
+    border-radius: 999px;
+    color: var(--style);
+    font-size: 14px;
+}
+
+.badge::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--deco);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50%{
+        transform: scale(1.4);
+        opacity: 0.5;
+    }
+}
+
+/* liste de pastilles qui passe à la ligne quand il n'y a plus de place */
+.tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pastille{
+    padding: 2px 10px;
+    background: var(--clair);
+    border-radius: 999px;
+    color: var(--style);
+    font-family: var(--code);
+    font-size: 12px;
+}
+
+/* carte du bento, avec l'ombre décalée façon Devlog */
+.case{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: var(--blanc);
+    border: 2px solid var(--clair);
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 var(--clair);
+}
+
+.case h3{
+    color: var(--style);
+    font-family: var(--code);
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: lowercase;
+}
+
+/* apparitions au scroll : invisibles au départ (seulement avec JS), script.js ajoute la classe visible
+   transform et pas translate : translate sert déjà au survol des cartes */
+.js .apparition{
+    opacity: 0;
+}
+
+@keyframes apparition {
+    from{
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to{
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.js .apparition.visible{
+    animation: apparition 0.6s ease-out forwards;
+}
+
+/*
+fin commun
+
+debut accueil
+ */
+
+/* le haut de l'accueil : badge, nom, phrase et boutons */
+#hero{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 48px 0 32px;
+}
+
+#hero h1{
+    font-size: 44px;
+}
+
+.typing{
+    color: var(--style);
+    font-family: var(--code);
+}
+
+/* le 2e bouton (Mon CV) est en contour, pour que le 1er reste le bouton principal */
+#hero a + a{
+    background: transparent;
+    border-color: var(--style);
+    color: var(--style);
+}
+
+/* grille bento : 2 colonnes sur mobile, 4 sur ordi */
+.bento{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* sur mobile, les cases 1, 2, 5 et 6 prennent toute la largeur */
+.bento .case:nth-child(1), .bento .case:nth-child(2), .bento .case:nth-child(5), .bento .case:nth-child(6){
+    grid-column: span 2;
+}
+
+.bento .case:first-child img{
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--style);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bento .case:first-child h3{
+    color: var(--noir);
+    font-family: var(--title);
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: none;
+}
+
+#projets > a{
+    display: inline-block;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* encadré lavande d'appel à l'action (accueil et parcours) */
+#contact, #cv{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 32px 0;
+    padding: 32px 24px;
+    background: var(--clair);
+    border-radius: 24px;
+}
+
+#contact h2, #cv h2{
+    border: none;
     color: var(--noir);
 }
 
 /*
-fin header/footer
-
-debut presentation
- */
-
-#pres{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 75px 0;
-    background-image: linear-gradient(rgba(1, 1, 1, 0.5),
-    rgba(1, 1, 1, 0.5)),
-    url("../image/dev-web.jpg");
-    background-size:cover ;
-    background-position: center;
-}
-
-#pres div{
-    display: flex;
-    gap: 16px;
-}
-
-#pres h2{
-    margin-bottom: 0;
-}
-
-#pres h2::after{
-    margin: 8px auto 0;
-}
-
-/*
-fin presentation
-
-debut description
- */
-
-.who{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 48px;
-}
-
-#desc img{
-    width: 200px;
-    height:200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--style);
-    box-shadow: 8px 8px 0 var(--style);
-    flex-shrink: 0;
-}
-
-.info{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 65ch;
-}
-
-.info .bouton{
-    align-self: flex-start;
-}
-
-.who ul{
-    display: flex;
-    gap: 16px;
-    list-style: none;
-}
-
-.blocs{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 48px;
-    margin-top: 48px;
-}
-
-.bloc{
-    border: 2px solid var(--style);
-    border-radius: 12px;
-    padding: 24px;
-}
-
-.bloc h3{
-    margin-bottom: 16px;
-}
-
-.parcours{
-    list-style: none;
-    border-left: 2px solid var(--style);
-    padding-left: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.parcours li{
-    position: relative;
-}
-
-.parcours li::before{
-    content: "";
-    position: absolute;
-    left: -32px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--text);
-}
-
-.parcours time{
-    font-weight: bold;
-}
-
-.recherche{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.secteur{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-}
-
-.secteur .pastille{
-    padding: 4px 16px;
-}
-
-.pastille{
-    background: var(--style);
-    padding: 15px 20px;
-    border-radius: 999px;
-}
-
-h2::after{
-    content: "";
-    display: block;
-    width: 60px;
-    height: 4px;
-    margin-top: 8px;
-    background: var(--style);
-}
-
-/*
-fin description
+fin accueil
 
 debut projets
  */
 
+/* 1 colonne sur mobile, 2 ou 3 sur ordi (voir version ordinateur) */
 .cards{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: 1fr;
     gap: 20px;
+    margin-top: 16px;
 }
 
 .card{
-    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     padding: 16px;
-    border: 2px solid var(--style);
+    background: var(--blanc);
+    border: 2px solid var(--clair);
     border-radius: 12px;
-    box-shadow: 12px 23px 0 rgb(1, 1, 1);
-    margin: 20px 0;
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 6px 6px 0 var(--clair);
+    transition: translate 0.3s, box-shadow 0.3s;
 }
 
+/* la carte se soulève au survol : translate, et pas transform qui sert aux apparitions */
 .card:hover{
-    transform: translate(-4px, -4px);
-    box-shadow: 16px 27px 0 rgb(1, 1, 1);
+    translate: -3px -3px;
+    box-shadow: 9px 9px 0 var(--clair);
 }
 
+/* fond lavande : il sert d'emplacement tant que la capture d'écran n'est pas là */
 .card img{
-    height: 150px;
     width: 100%;
-    object-fit: cover;
+    height: 160px;
+    background: var(--clair);
     border-radius: 8px;
+    object-fit: cover;
 }
 
-.new{
-    position: absolute;
-    top: 24px;
-    right: 24px;
+/* captures d'écran : le contenu important (le nom, le titre) est à gauche, donc on garde le côté gauche quand l'image est recadrée */
+.card img.capture{
+    object-position: left top;
 }
 
-.tags{
-    display: flex;
-    gap: 8px;
+.card h2{
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: var(--noir);
+    font-family: var(--title);
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: none;
 }
 
-.card .pastille{
-    padding: 4px 16px;
+/* pas de « // » sur les titres des cartes */
+.card h2::before{
+    content: none;
 }
 
-.card .bouton{
+.card h3 a{
+    color: var(--noir);
+    text-decoration: none;
+}
+
+.card h3 a:hover{
+    text-decoration: underline;
+    text-decoration-color: var(--deco);
+}
+
+.card .badge{
     align-self: flex-start;
-    margin: auto 0 0;
+}
+
+/* margin-top auto : les liens restent en bas de la carte, même si les textes n'ont pas la même longueur */
+.liens{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: auto;
+}
+
+.liens a{
+    font-weight: 600;
 }
 
 /*
 fin projets
 
-debut competences
+debut parcours
  */
 
-table{
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+/* frise chronologique : la ligne verticale est la bordure gauche de la liste */
+.frise{
+    margin-left: 6px;
+    border-left: 2px solid var(--clair);
 }
 
-th, td{
-    padding: 8px 16px;
+.frise li{
+    position: relative;
+    padding: 0 0 24px 24px;
 }
 
-thead{
-    background: var(--style);
-}
-
-tbody tr:nth-child(even){
-    background: rgba(148, 47, 60, 0.3);
-}
-
-.point{
-    display: inline-block;
+/* le point de chaque étape, posé sur la ligne ; l'ombre couleur du fond le détache de la ligne */
+.frise li::before{
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 6px;
     width: 12px;
     height: 12px;
-    border: 2px solid var(--text);
+    background: var(--style);
     border-radius: 50%;
-    margin-right: 4px;
+    box-shadow: 0 0 0 4px var(--blanc);
+}
+
+.date{
+    color: var(--style);
+    font-family: var(--code);
+    font-size: 13px;
+}
+
+.lieu{
+    color: var(--style);
+    font-size: 14px;
+}
+
+#competences{
+    display: grid;
+    gap: 12px;
+}
+
+#competences h2{
+    margin-bottom: 4px;
+}
+
+#langues ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 480px;
+}
+
+#langues li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.points{
+    display: flex;
+    gap: 4px;
+}
+
+/* niveau de langue en 5 points, .plein pour les points remplis */
+.point{
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--style);
+    border-radius: 50%;
 }
 
 .plein{
-    background: var(--text);
+    background: var(--style);
 }
 
 /*
-fin competences
+fin parcours
 
 debut contact
  */
 
-#form{
-    display: flex;
-    justify-content: space-around;
-    gap: 48px;
+#contact-link .case{
+    max-width: 640px;
+    margin-top: 24px;
 }
 
-.texte ul{
-    list-style: none;
-    margin-top: 16px;
+#contact-link .case h2{
+    margin-bottom: 4px;
 }
 
+#contact-link .case p + h2{
+    margin-top: 12px;
+}
+
+/* formulaire en colonne, 640px maximum pour rester lisible */
 form{
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    width: 50%;
+    gap: 6px;
+    max-width: 640px;
 }
 
-input, select, textarea, button{
-    font-family: inherit;
-    font-size: 16px;
+form label{
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* anti-spam Web3Forms : caché pour tout le monde, lecteurs d'écran compris (donc pas la classe .hide) */
+form .botcheck{
+    display: none;
 }
 
 input, select, textarea{
-    padding: 8px 16px;
-    border: 2px solid var(--style);
-    border-radius: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 14px;
     background: var(--blanc);
-    color: var(--noir);
+    border: 2px solid var(--clair);
+    border-radius: 12px;
 }
 
+input:focus, select:focus, textarea:focus{
+    border-color: var(--style);
+}
+
+/* bordure corail seulement une fois que la personne a touché au champ, pas dès l'arrivée sur la page */
+input:user-invalid, select:user-invalid, textarea:user-invalid{
+    border-color: var(--deco);
+}
+
+/* le message peut être agrandi en hauteur seulement */
 textarea{
-    min-height: 120px;
+    min-height: 140px;
     resize: vertical;
+}
+
+#compteur{
+    align-self: flex-end;
+    color: var(--style);
+    font-family: var(--code);
+    font-size: 13px;
 }
 
 .check{
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-top: 8px;
 }
 
+/* case à cocher agrandie, aux couleurs du site (accent-color) */
 .check input{
     width: 20px;
     height: 20px;
+    min-height: auto;
     accent-color: var(--style);
 }
 
-.check a{
-    color: var(--text);
+.check label{
+    margin: 0;
+    font-weight: 400;
 }
 
 form .bouton{
     align-self: flex-start;
-    border: none;
-    cursor: pointer;
-    margin: 16px 0;
+    margin-top: 16px;
 }
 
 /*
 fin contact
 
-version mobile
+version ordinateur
  */
 
-@media (max-width: 768px){
-    header, footer{
-        flex-direction: column;
+/* à partir de 768px : tablette et ordi (le reste du fichier est pensé mobile d'abord) */
+@media (min-width: 768px){
+    /* header sur une seule ligne : logo à gauche, menu et boutons à droite */
+    header{
+        flex-wrap: nowrap;
+        gap: 24px;
+        padding: 14px 40px;
+    }
+
+    header nav{
+        flex-basis: auto;
+        margin-left: auto;
+    }
+
+    header nav ul{
+        flex-direction: row;
+        gap: 28px;
+    }
+
+    header nav a{
+        padding: 0;
+        font-size: 17px;
+    }
+
+    .mode{
+        padding-bottom: 0;
+    }
+
+    main{
+        padding: 0 40px;
+    }
+
+    h1{
+        font-size: 52px;
+    }
+
+    #hero{
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 80px 0 48px;
+    }
+
+    /* dans le hero, tout prend une ligne entière, sauf les deux boutons qui restent côte à côte */
+    #hero > :not(a){
+        flex-basis: 100%;
+    }
+
+    #hero .badge{
+        flex-basis: auto;
+    }
+
+    #hero .badge + h1{
+        margin-top: 0;
+    }
+
+    #hero h1{
+        font-size: 68px;
+    }
+
+    .bento{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 16px;
-        padding: 16px;
     }
 
-    header ul{
-        flex-wrap: wrap;
-    }
-
-    section{
-        padding: 48px 16px;
-    }
-
-    .who{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .who ul{
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .info .bouton{
-        align-self: center;
-    }
-
-    .blocs{
-        grid-template-columns: 1fr;
+    /* la case de présentation prend 2 lignes de haut */
+    .bento .case:first-child{
+        grid-row: span 2;
     }
 
     .cards{
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
     }
 
-    #form{
-        flex-direction: column;
+    /* 3 cartes sur l'accueil (projets à la une), 2 sur la page projets */
+    #pres ~ #projets .cards{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    form{
-        width: 100%;
+    #competences{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* le titre prend toute la largeur, au-dessus des 2 colonnes */
+    #competences h2{
+        grid-column: 1 / -1;
+    }
+
+    #contact, #cv{
+        padding: 40px;
+    }
+
+    footer{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 40px;
+    }
+
+    /* sur ordi : pas de burger et le menu toujours affiché
+       mêmes sélecteurs qu'en mobile, sinon la règle mobile (plus spécifique) gagnerait */
+    .js .burger{
+        display: none;
+    }
+
+    .js .burger[aria-expanded="false"] ~ nav{
+        display: block;
+    }
+
+    .js .burger[aria-expanded="false"] ~ .mode{
+        display: flex;
     }
 }
+
+/*
+fin version ordinateur
+
+debut accessibilité
+ */
+
+/* moins d'animations pour les personnes qui l'ont demandé dans les réglages de leur appareil */
+@media (prefers-reduced-motion: reduce) {
+    .js .apparition{
+        opacity: 1;
+    }
+    .js .apparition.visible{
+        animation: none;
+    }
+}
+
+/*
+fin accessibilité
+*/
