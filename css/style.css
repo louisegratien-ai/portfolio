@@ -4,7 +4,7 @@ initialisation
 :root{
     /* noir et blanc */
     --noir : #241b30;
-    --blanc : #ffffff;
+    --blanc : #fcf8f8;
     /* les 3 couleurs */
     --style : #4a2c7a;   /* violet */
     --deco : #ff6b5b;    /* corail : déco uniquement, jamais pour du texte sur fond clair */
@@ -13,6 +13,15 @@ initialisation
     --title: "Space Grotesk", sans-serif;
     --code: "JetBrains Mono", monospace;
     --font: "Segoe UI", sans-serif;
+}
+
+/*on inverse les couleurs*/
+.sombre {
+    --blanc : #1a1325;
+    --noir : #ede7f6;
+    --style : #c3a9f0;
+    --clair : #2d2140;
+    color-scheme: dark;
 }
 
 * {
@@ -141,7 +150,6 @@ header img{
 .js .burger[aria-expanded="true"] span:nth-child(3){
     transform: translateY(-8px) rotate(-45deg);
 }
-
 
 header nav{
     flex-basis: 100%;
