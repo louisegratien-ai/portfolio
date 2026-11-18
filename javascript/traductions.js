@@ -1,5 +1,6 @@
 // dictionnaire des textes du site : une clé = un texte
-// la clé est la même que celle du data-trad dans le HTML
+// la clé est la même que celle du data-trad (ou data-trad-label, data-trad-alt) dans le HTML
+// les boîtes fr et en ont les mêmes clés, dans le même ordre : une clé ajoutée d'un côté s'ajoute de l'autre
 
 const traductions = {
     fr: {
@@ -120,9 +121,38 @@ const traductions = {
         "contact-offre": "Offre d'alternance",
         "contact-demande-site": "Demande de site",
         "contact-message": "Message :",
-        "contact-compteur": "Compteur : 0 / 1000 caractères",
+        "contact-caracteres": "caractères",
         "contact-accord": "J'accepte que mes données servent à me recontacter",
-        "contact-envoyer": "Envoyer"
+        "contact-envoyer": "Envoyer",
+        // mentions légales
+        "titre-mentions": "Mentions légales – Louise Gratien",
+        "ml-titre": "Mentions légales",
+        "ml-intro": "Les informations légales du site, et ce que deviennent vos données.",
+        "ml-editrice": "Éditrice du site",
+        "ml-editrice-texte": "Ce site est un portfolio personnel, édité à titre non professionnel par Louise Gratien, étudiante en développement web à Rouen.",
+        "ml-directrice": "Directrice de la publication : Louise Gratien.",
+        "ml-contact": "Contact :",
+        "ml-hebergement": "Hébergement",
+        "ml-hebergement-texte": "Le site est hébergé par GitHub Pages, un service de GitHub, Inc.",
+        "ml-etats-unis": "États-Unis",
+        "ml-telephone": "Téléphone :",
+        "ml-donnees": "Formulaire de contact et données personnelles",
+        "ml-donnees-recues": "Quand vous m'écrivez avec le formulaire de contact, je reçois votre nom, votre prénom, votre adresse email, le sujet choisi et votre message.",
+        "ml-donnees-usage": "Ces informations servent uniquement à vous répondre. Elles ne sont ni revendues, ni utilisées pour de la prospection, ni partagées avec qui que ce soit.",
+        "ml-donnees-trajet": "Pour m'arriver par email, elles passent par le service",
+        "ml-donnees-conservation": ", puis sont conservées dans ma boîte mail (Gmail) le temps de traiter votre demande, et au plus tard un an après notre dernier échange.",
+        "ml-hors-ue": "GitHub, Web3Forms et Google peuvent traiter des données en dehors de l'Union européenne.",
+        "ml-base-legale": "Base légale : votre consentement, que vous donnez en cochant la case du formulaire.",
+        "ml-droits": "Vous pouvez à tout moment demander à consulter, corriger ou supprimer vos données en m'écrivant à",
+        "ml-cnil": "Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL :",
+        "ml-cookies": "Cookies et stockage",
+        "ml-cookies-aucun": "Ce site n'utilise aucun cookie, aucun outil de statistiques et aucune publicité.",
+        "ml-stockage": "Il enregistre seulement deux préférences dans le stockage local de votre navigateur (localStorage) : le mode clair ou sombre, et la langue. Elles restent sur votre appareil, ne me sont jamais envoyées, et vous pouvez les effacer depuis les réglages de votre navigateur.",
+        "ml-polices": "Les polices d'écriture sont chargées depuis Google Fonts : pour les afficher, votre navigateur contacte les serveurs de Google, qui reçoivent alors votre adresse IP.",
+        "ml-propriete": "Propriété intellectuelle",
+        "ml-propriete-texte": "Sauf mention contraire, les textes et les images de ce site m'appartiennent. Le logo BDE404 appartient à l'équipe du projet de groupe.",
+        "ml-code": "Le code source du site est consultable sur GitHub :",
+        "ml-maj": "Dernière mise à jour : novembre 2026."
     },
     en: {
         // header et footer (toutes les pages)
@@ -242,8 +272,37 @@ const traductions = {
         "contact-offre": "Work-study offer",
         "contact-demande-site": "Website request",
         "contact-message": "Message:",
-        "contact-compteur": "Counter: 0 / 1000 characters",
+        "contact-caracteres": "characters",
         "contact-accord": "I agree that my data may be used to get back to me",
-        "contact-envoyer": "Send"
+        "contact-envoyer": "Send",
+        // mentions légales
+        "titre-mentions": "Legal notice – Louise Gratien",
+        "ml-titre": "Legal notice",
+        "ml-intro": "The legal information about this site, and what happens to your data.",
+        "ml-editrice": "Site publisher",
+        "ml-editrice-texte": "This site is a personal portfolio, published on a non-professional basis by Louise Gratien, a web development student in Rouen.",
+        "ml-directrice": "Publication director: Louise Gratien.",
+        "ml-contact": "Contact:",
+        "ml-hebergement": "Hosting",
+        "ml-hebergement-texte": "The site is hosted by GitHub Pages, a service of GitHub, Inc.",
+        "ml-etats-unis": "United States",
+        "ml-telephone": "Phone:",
+        "ml-donnees": "Contact form and personal data",
+        "ml-donnees-recues": "When you write to me using the contact form, I receive your last name, first name, email address, the subject you chose and your message.",
+        "ml-donnees-usage": "This information is only used to reply to you. It is never sold, used for marketing, or shared with anyone.",
+        "ml-donnees-trajet": "To reach me by email, it goes through the",
+        "ml-donnees-conservation": " service, then it is kept in my mailbox (Gmail) for as long as it takes to handle your request, and no longer than one year after our last exchange.",
+        "ml-hors-ue": "GitHub, Web3Forms and Google may process data outside the European Union.",
+        "ml-base-legale": "Legal basis: your consent, which you give by ticking the box on the form.",
+        "ml-droits": "You can ask to access, correct or delete your data at any time by writing to me at",
+        "ml-cnil": "If you believe your rights are not being respected, you can file a complaint with the CNIL (the French data protection authority):",
+        "ml-cookies": "Cookies and storage",
+        "ml-cookies-aucun": "This site uses no cookies, no analytics tools and no advertising.",
+        "ml-stockage": "It only saves two preferences in your browser's local storage (localStorage): light or dark mode, and the language. They stay on your device, are never sent to me, and you can clear them in your browser settings.",
+        "ml-polices": "The fonts are loaded from Google Fonts: to display them, your browser contacts Google's servers, which then receive your IP address.",
+        "ml-propriete": "Intellectual property",
+        "ml-propriete-texte": "Unless stated otherwise, the texts and images on this site belong to me. The BDE404 logo belongs to the group project team.",
+        "ml-code": "The site's source code is available on GitHub:",
+        "ml-maj": "Last updated: November 2026."
     }
 };
