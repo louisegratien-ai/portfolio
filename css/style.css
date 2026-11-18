@@ -667,6 +667,10 @@ form label{
     font-weight: 600;
 }
 
+form .botcheck{
+    display: none;
+}
+
 input, select, textarea{
     width: 100%;
     min-height: 44px;
