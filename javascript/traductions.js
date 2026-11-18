@@ -1,5 +1,6 @@
 // dictionnaire des textes du site : une clé = un texte
-// la clé est la même que celle du data-trad dans le HTML
+// la clé est la même que celle du data-trad (ou data-trad-label, data-trad-alt) dans le HTML
+// les boîtes fr et en ont les mêmes clés, dans le même ordre : une clé ajoutée d'un côté s'ajoute de l'autre
 
 const traductions = {
     fr: {
@@ -120,7 +121,7 @@ const traductions = {
         "contact-offre": "Offre d'alternance",
         "contact-demande-site": "Demande de site",
         "contact-message": "Message :",
-        "contact-compteur": "Compteur : 0 / 1000 caractères",
+        "contact-caracteres": "caractères",
         "contact-accord": "J'accepte que mes données servent à me recontacter",
         "contact-envoyer": "Envoyer",
         // mentions légales
@@ -271,7 +272,7 @@ const traductions = {
         "contact-offre": "Work-study offer",
         "contact-demande-site": "Website request",
         "contact-message": "Message:",
-        "contact-compteur": "Counter: 0 / 1000 characters",
+        "contact-caracteres": "characters",
         "contact-accord": "I agree that my data may be used to get back to me",
         "contact-envoyer": "Send",
         // mentions légales

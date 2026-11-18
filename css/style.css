@@ -15,7 +15,8 @@ initialisation
     --font: "Segoe UI", sans-serif;
 }
 
-/*on inverse les couleurs*/
+/* mode sombre : classe posée sur <html> par head.js et script.js
+   les couleurs sont inversées : --blanc devient foncé et --noir devient clair */
 .sombre {
     --blanc : #1a1325;
     --noir : #ede7f6;
@@ -24,10 +25,12 @@ initialisation
     color-scheme: dark;
 }
 
+/* version anglaise : page cachée le temps que script.js la traduise (classe posée par head.js) */
 .traduction-en-cours body{
     visibility: hidden;
 }
 
+/* reset : plus de marges par défaut du navigateur, et box-sizing pour que padding et bordure restent dans la largeur */
 * {
     margin: 0;
     padding: 0;
@@ -35,10 +38,12 @@ initialisation
     /*outline: 1px solid red;*/
 }
 
+/* défilement doux quand on clique sur un lien vers une ancre */
 html{
     scroll-behavior: smooth;
 }
 
+/* toutes les couleurs passent par les variables : c'est ce qui permet au mode sombre de tout changer d'un coup */
 body{
     background: var(--blanc);
     color: var(--noir);
@@ -52,10 +57,12 @@ h1, h2, h3 {
     line-height: 1.2;
 }
 
+/* pas de puces : les listes servent à la structure (menu, pastilles, frise), le style est fait à la main */
 ul, ol{
     list-style: none;
 }
 
+/* une image ne dépasse jamais de son conteneur */
 img{
     display: block;
     max-width: 100%;
@@ -65,16 +72,19 @@ a{
     color: var(--style);
 }
 
+/* les champs et les boutons prennent la police et la couleur du site (le navigateur leur en met d'autres par défaut) */
 button, input, select, textarea{
     font: inherit;
     color: inherit;
 }
 
+/* contour bien visible pour la navigation au clavier (seulement au clavier, pas au clic) */
 :focus-visible{
     outline: 3px solid var(--deco);
     outline-offset: 3px;
 }
 
+/* caché à l'écran mais toujours lu par les lecteurs d'écran */
 .hide{
     position: absolute;
     width: 1px;
@@ -90,6 +100,7 @@ fin initialisation
 debut header
  */
 
+/* bandeau violet qui reste collé en haut pendant le scroll */
 header{
     position: sticky;
     top: 0;
@@ -104,6 +115,7 @@ header{
     border-radius: 0 0 24px 24px;
 }
 
+/* photo ronde, recadrée sans être déformée (object-fit) */
 header img{
     width: 48px;
     height: 48px;
@@ -112,10 +124,12 @@ header img{
     border: 2px solid var(--blanc);
 }
 
+/* burger : caché sans JS (le menu reste alors affiché), visible seulement avec la classe js */
 .burger{
     display: none;
 }
 
+/* 44px : taille minimum confortable pour un doigt */
 .js .burger{
     display: flex;
     flex-direction: column;
@@ -130,6 +144,7 @@ header img{
     border: none;
 }
 
+/* les 3 barres du burger */
 .js .burger span{
     display: block;
     width: 26px;
@@ -139,10 +154,12 @@ header img{
     transition: transform 0.3s, opacity 0.3s;
 }
 
+/* menu fermé : on cache la nav et les boutons qui suivent le burger (~) */
 .js .burger[aria-expanded="false"] ~ nav, .js .burger[aria-expanded="false"] ~ .mode{
     display: none;
 }
 
+/* menu ouvert : les 3 barres forment une croix (8px = hauteur d'une barre + gap) */
 .js .burger[aria-expanded="true"] span:nth-child(1){
     transform: translateY(8px) rotate(45deg);
 }
@@ -155,6 +172,7 @@ header img{
     transform: translateY(-8px) rotate(-45deg);
 }
 
+/* sur mobile, la nav passe à la ligne sous le logo et prend toute la largeur */
 header nav{
     flex-basis: 100%;
 }
@@ -174,6 +192,7 @@ header nav a{
     text-decoration: none;
 }
 
+/* la page actuelle (aria-current) et le survol sont soulignés en corail */
 header nav a[aria-current="page"], header nav a:hover {
     text-decoration: underline;
     text-decoration-color: var(--deco);
@@ -187,6 +206,7 @@ header nav a[aria-current="page"], header nav a:hover {
     padding-bottom: 8px;
 }
 
+/* boutons mode sombre et langue, en pilule */
 .mode button{
     min-height: 44px;
     padding: 0 16px;
@@ -232,6 +252,7 @@ footer a, .terminal{
     color: var(--noir);
 }
 
+/* le bouton du terminal secret ressemble aux liens du footer */
 .terminal{
     padding: 0;
     background: none;
@@ -246,6 +267,7 @@ fin footer
 debut commun
  */
 
+/* contenu centré, 1100px maximum sur grand écran */
 main{
     max-width: 1100px;
     margin: 0 auto;
@@ -261,6 +283,7 @@ h1{
     font-size: 40px;
 }
 
+/* curseur corail qui clignote après le titre, façon terminal */
 h1::after{
     content: "";
     display: inline-block;
@@ -281,6 +304,7 @@ h1 + p{
     margin-top: 12px;
 }
 
+/* titres de section façon code : police mono, minuscules, précédés de « // » */
 h2{
     margin-bottom: 16px;
     padding-bottom: 4px;
@@ -301,6 +325,7 @@ h3{
     font-size: 18px;
 }
 
+/* boutons pilule, 44px de haut minimum pour le doigt */
 .bouton, #hero a, #contact a{
     display: inline-flex;
     align-items: center;
@@ -317,12 +342,14 @@ h3{
     transition: background 0.3s, border-color 0.3s, color 0.3s;
 }
 
+/* au survol, fond corail : en mode clair le texte --noir est bien lisible, en mode sombre --noir devient clair et le contraste est trop faible (à corriger) */
 .bouton:hover, #hero a:hover, #contact a:hover{
     background: var(--deco);
     border-color: var(--deco);
     color: var(--noir);
 }
 
+/* étiquette « disponible » avec un point corail qui pulse */
 .badge{
     display: inline-flex;
     align-items: center;
@@ -350,6 +377,7 @@ h3{
     }
 }
 
+/* liste de pastilles qui passe à la ligne quand il n'y a plus de place */
 .tags{
     display: flex;
     flex-wrap: wrap;
@@ -365,6 +393,7 @@ h3{
     font-size: 12px;
 }
 
+/* carte du bento, avec l'ombre décalée façon Devlog */
 .case{
     display: flex;
     flex-direction: column;
@@ -384,6 +413,8 @@ h3{
     text-transform: lowercase;
 }
 
+/* apparitions au scroll : invisibles au départ (seulement avec JS), script.js ajoute la classe visible
+   transform et pas translate : translate sert déjà au survol des cartes */
 .js .apparition{
     opacity: 0;
 }
@@ -409,6 +440,7 @@ fin commun
 debut accueil
  */
 
+/* le haut de l'accueil : badge, nom, phrase et boutons */
 #hero{
     display: flex;
     flex-direction: column;
@@ -426,18 +458,21 @@ debut accueil
     font-family: var(--code);
 }
 
+/* le 2e bouton (Mon CV) est en contour, pour que le 1er reste le bouton principal */
 #hero a + a{
     background: transparent;
     border-color: var(--style);
     color: var(--style);
 }
 
+/* grille bento : 2 colonnes sur mobile, 4 sur ordi */
 .bento{
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
 }
 
+/* sur mobile, les cases 1, 2, 5 et 6 prennent toute la largeur */
 .bento .case:nth-child(1), .bento .case:nth-child(2), .bento .case:nth-child(5), .bento .case:nth-child(6){
     grid-column: span 2;
 }
@@ -464,6 +499,7 @@ debut accueil
     font-weight: 600;
 }
 
+/* encadré lavande d'appel à l'action (accueil et parcours) */
 #contact, #cv{
     display: flex;
     flex-direction: column;
@@ -486,6 +522,7 @@ fin accueil
 debut projets
  */
 
+/* 1 colonne sur mobile, 2 ou 3 sur ordi (voir version ordinateur) */
 .cards{
     display: grid;
     grid-template-columns: 1fr;
@@ -505,17 +542,24 @@ debut projets
     transition: translate 0.3s, box-shadow 0.3s;
 }
 
+/* la carte se soulève au survol : translate, et pas transform qui sert aux apparitions */
 .card:hover{
     translate: -3px -3px;
     box-shadow: 9px 9px 0 var(--clair);
 }
 
+/* fond lavande : il sert d'emplacement tant que la capture d'écran n'est pas là */
 .card img{
     width: 100%;
     height: 160px;
     background: var(--clair);
     border-radius: 8px;
     object-fit: cover;
+}
+
+/* captures d'écran : le contenu important (le nom, le titre) est à gauche, donc on garde le côté gauche quand l'image est recadrée */
+.card img.capture{
+    object-position: left top;
 }
 
 .card h2{
@@ -529,6 +573,7 @@ debut projets
     text-transform: none;
 }
 
+/* pas de « // » sur les titres des cartes */
 .card h2::before{
     content: none;
 }
@@ -547,6 +592,7 @@ debut projets
     align-self: flex-start;
 }
 
+/* margin-top auto : les liens restent en bas de la carte, même si les textes n'ont pas la même longueur */
 .liens{
     display: flex;
     flex-wrap: wrap;
@@ -564,6 +610,7 @@ fin projets
 debut parcours
  */
 
+/* frise chronologique : la ligne verticale est la bordure gauche de la liste */
 .frise{
     margin-left: 6px;
     border-left: 2px solid var(--clair);
@@ -574,6 +621,7 @@ debut parcours
     padding: 0 0 24px 24px;
 }
 
+/* le point de chaque étape, posé sur la ligne ; l'ombre couleur du fond le détache de la ligne */
 .frise li::before{
     content: "";
     position: absolute;
@@ -625,6 +673,7 @@ debut parcours
     gap: 4px;
 }
 
+/* niveau de langue en 5 points, .plein pour les points remplis */
 .point{
     width: 12px;
     height: 12px;
@@ -655,6 +704,7 @@ debut contact
     margin-top: 12px;
 }
 
+/* formulaire en colonne, 640px maximum pour rester lisible */
 form{
     display: flex;
     flex-direction: column;
@@ -667,6 +717,7 @@ form label{
     font-weight: 600;
 }
 
+/* anti-spam Web3Forms : caché pour tout le monde, lecteurs d'écran compris (donc pas la classe .hide) */
 form .botcheck{
     display: none;
 }
@@ -684,10 +735,12 @@ input:focus, select:focus, textarea:focus{
     border-color: var(--style);
 }
 
+/* bordure corail seulement une fois que la personne a touché au champ, pas dès l'arrivée sur la page */
 input:user-invalid, select:user-invalid, textarea:user-invalid{
     border-color: var(--deco);
 }
 
+/* le message peut être agrandi en hauteur seulement */
 textarea{
     min-height: 140px;
     resize: vertical;
@@ -707,6 +760,7 @@ textarea{
     margin-top: 8px;
 }
 
+/* case à cocher agrandie, aux couleurs du site (accent-color) */
 .check input{
     width: 20px;
     height: 20px;
@@ -730,7 +784,9 @@ fin contact
 version ordinateur
  */
 
+/* à partir de 768px : tablette et ordi (le reste du fichier est pensé mobile d'abord) */
 @media (min-width: 768px){
+    /* header sur une seule ligne : logo à gauche, menu et boutons à droite */
     header{
         flex-wrap: nowrap;
         gap: 24px;
@@ -770,6 +826,7 @@ version ordinateur
         padding: 80px 0 48px;
     }
 
+    /* dans le hero, tout prend une ligne entière, sauf les deux boutons qui restent côte à côte */
     #hero > :not(a){
         flex-basis: 100%;
     }
@@ -791,6 +848,7 @@ version ordinateur
         gap: 16px;
     }
 
+    /* la case de présentation prend 2 lignes de haut */
     .bento .case:first-child{
         grid-row: span 2;
     }
@@ -800,6 +858,7 @@ version ordinateur
         gap: 24px;
     }
 
+    /* 3 cartes sur l'accueil (projets à la une), 2 sur la page projets */
     #pres ~ #projets .cards{
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -808,6 +867,7 @@ version ordinateur
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    /* le titre prend toute la largeur, au-dessus des 2 colonnes */
     #competences h2{
         grid-column: 1 / -1;
     }
@@ -822,6 +882,9 @@ version ordinateur
         align-items: center;
         padding: 24px 40px;
     }
+
+    /* sur ordi : pas de burger et le menu toujours affiché
+       mêmes sélecteurs qu'en mobile, sinon la règle mobile (plus spécifique) gagnerait */
     .js .burger{
         display: none;
     }
@@ -835,6 +898,13 @@ version ordinateur
     }
 }
 
+/*
+fin version ordinateur
+
+debut accessibilité
+ */
+
+/* moins d'animations pour les personnes qui l'ont demandé dans les réglages de leur appareil */
 @media (prefers-reduced-motion: reduce) {
     .js .apparition{
         opacity: 1;
@@ -843,6 +913,7 @@ version ordinateur
         animation: none;
     }
 }
+
 /*
-fin version ordinateur
+fin accessibilité
 */
