@@ -1,22 +1,22 @@
 const burger = document.querySelector(".burger");
 const theme = document.querySelector("#theme");
 const html = document.documentElement;
-const boutonLangue = document.querySelector("#langue")
+const boutonLangue = document.querySelector("#langue");
 
 function fermerMenu() {
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Ouvrir le menu");
-};
+}
 
 function themeSombre() {
     html.classList.add("sombre");
     theme.textContent = "mode clair";
-};
+}
 
 function themeClair() {
     html.classList.remove("sombre");
     theme.textContent = "mode sombre";
-};
+}
 
 function traduire(langue) {
     document.querySelectorAll("[data-trad]").forEach(function (trad) {
@@ -28,7 +28,6 @@ function traduire(langue) {
 if (html.classList.contains("sombre")) {
     themeSombre();
 }
-;
 
 burger.addEventListener("click", function menuBurger() {
     if (burger.getAttribute("aria-expanded") === "true") {
@@ -61,14 +60,20 @@ function langueAnglais() {
     traduire("en");
     html.setAttribute("lang", "en");
     boutonLangue.textContent = "français";
-    localStorage.setItem("langue", "en")
+    boutonLangue.setAttribute("lang", "fr");
+    localStorage.setItem("langue", "en");
 }
 
 function langueFrancais() {
     traduire("fr");
     html.setAttribute("lang", "fr");
     boutonLangue.textContent = "english";
-    localStorage.setItem("langue", "fr")
+    boutonLangue.setAttribute("lang", "en");
+    localStorage.setItem("langue", "fr");
+}
+
+if (localStorage.getItem("langue") === "en") {
+    langueAnglais();
 }
 
 boutonLangue.addEventListener("click", function langueChange() {
