@@ -97,3 +97,16 @@ boutonLangue.addEventListener("click", function langueChange() {
         langueFrancais();
     }
 });
+
+const surveillant = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (entree) {
+        if (entree.isIntersecting) {
+            entree.target.classList.add("visible");
+            surveillant.unobserve(entree.target);
+        }
+    });
+}, {threshold: 0.25});
+
+document.querySelectorAll(".apparition").forEach(function (element) {
+    surveillant.observe(element);
+});
