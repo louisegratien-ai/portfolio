@@ -49,42 +49,42 @@
 <main>
     <section id="contact-link">
         <h1>Contact</h1>
-        <p>Une alternance, une question, un projet ? Écrivez-moi.</p>
+        <p data-trad="contact-intro">Une alternance, une question, un projet ? Écrivez-moi.</p>
         <div class="case">
-            <h2>Me joindre</h2>
+            <h2 data-trad="contact-joindre">Me joindre</h2>
             <ul>
                 <li><a href="mailto:louise.gratien@gmail.com">louise.gratien@gmail.com</a></li>
                 <li><a href="https://www.linkedin.com/in/louise-gratien">linkedin.com/in/louise-gratien</a></li>
                 <li><a href="https://github.com/louisegratien-ai">github.com/louisegratien-ai</a></li>
             </ul>
-            <h2>Mobilité</h2>
+            <h2 data-trad="commun-mobilite">Mobilité</h2>
             <p>Rouen, Elbeuf</p>
         </div>
     </section>
     <section id="form">
-        <h2>Formulaire de contact</h2>
+        <h2 data-trad="contact-formulaire">Formulaire de contact</h2>
         <form action="" method="post">
-            <label for="nom">Nom :</label>
+            <label for="nom" data-trad="contact-nom">Nom :</label>
             <input type="text" id="nom" name="nom" required>
-            <label for="prenom">Prénom :</label>
+            <label for="prenom" data-trad="contact-prenom">Prénom :</label>
             <input type="text" id="prenom" name="prenom" required>
-            <label for="mail">Email :</label>
+            <label for="mail" data-trad="contact-email">Email :</label>
             <input type="email" id="mail" name="mail" required>
-            <label for="sujet">Sujet :</label>
+            <label for="sujet" data-trad="contact-sujet">Sujet :</label>
             <select id="sujet" name="sujet" required>
-                <option value="">Choisissez un sujet</option>
-                <option>Offre d'alternance</option>
-                <option>Question</option>
-                <option>Demande de site</option>
+                <option value="" data-trad="contact-choisir">Choisissez un sujet</option>
+                <option value="Offre d'alternance" data-trad="contact-offre">Offre d'alternance</option>
+                <option value="Question">Question</option>
+                <option value="Demande de site" data-trad="contact-demande-site">Demande de site</option>
             </select>
-            <label for="message">Message :</label>
+            <label for="message" data-trad="contact-message">Message :</label>
             <textarea id="message" name="message" minlength="10" maxlength="1000" aria-describedby="compteur" required></textarea>
-            <p id="compteur">Compteur : 0 / 1000 caractères</p>
+            <p id="compteur" data-trad="contact-compteur">Compteur : 0 / 1000 caractères</p>
             <div class="check">
                 <input type="checkbox" id="condition" required>
-                <label for="condition">J'accepte que mes données servent à me recontacter </label>
+                <label for="condition" data-trad="contact-accord">J'accepte que mes données servent à me recontacter</label>
             </div>
-            <button class="bouton">Envoyer</button>
+            <button class="bouton" data-trad="contact-envoyer">Envoyer</button>
         </form>
     </section>
 </main>
