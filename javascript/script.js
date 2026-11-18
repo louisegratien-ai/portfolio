@@ -7,7 +7,14 @@ function fermerMenu(){
     burger.setAttribute("aria-label", "Ouvrir le menu");
 };
 
-html.classList.add("js");
+function themeSombre(){
+    html.classList.add("sombre");
+    theme.setAttribute("aria-pressed", "true");
+}
+
+if (localStorage.getItem("theme") === "sombre") {
+    themeSombre();
+}
 
 burger.addEventListener("click", function menuBurger(){
     if (burger.getAttribute("aria-expanded") === "true" ){
@@ -30,11 +37,10 @@ theme.addEventListener("click", function themeChange(){
     if (html.classList.contains("sombre")){
         html.classList.remove("sombre");
         theme.setAttribute("aria-pressed", "false");
-        console.log("mode sombre stop");
+        localStorage.setItem("theme", "clair");
     }else {
-        html.classList.add("sombre");
-        theme.setAttribute("aria-pressed", "true");
-        console.log("mode sombre on");
+        themeSombre();
+        localStorage.setItem("theme", "sombre");
     }
 });
 
