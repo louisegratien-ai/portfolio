@@ -9,7 +9,12 @@ function fermerMenu() {
 
 function themeSombre() {
     html.classList.add("sombre");
-    theme.setAttribute("aria-pressed", "true");
+    theme.textContent = "mode clair";
+}
+
+function themeClair() {
+    html.classList.remove("sombre");
+    theme.textContent = "mode sombre";
 }
 
 if (html.classList.contains("sombre")) {
@@ -35,8 +40,7 @@ document.addEventListener("keydown", function keyboard(event) {
 
 theme.addEventListener("click", function themeChange() {
     if (html.classList.contains("sombre")) {
-        html.classList.remove("sombre");
-        theme.setAttribute("aria-pressed", "false");
+        themeClair();
         localStorage.setItem("theme", "clair");
     } else {
         themeSombre();
