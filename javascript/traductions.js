@@ -9,11 +9,22 @@ const traductions = {
         "nav-parcours": "Parcours",
         "footer-terminal": "Terminal secret",
         "footer-mentions": "Mentions légales",
-        // textes écrits par le JS (étapes 5a et 5b)
+        // textes écrits par le JS (bouton thème, label du burger)
         "theme-sombre": "mode sombre",
         "theme-clair": "mode clair",
         "menu-ouvrir": "Ouvrir le menu",
         "menu-fermer": "Fermer le menu",
+        // titres des onglets et textes cachés dans les attributs (aria-label, alt)
+        "titre-index": "Louise Gratien – Développeuse web",
+        "titre-projets": "Projets – Louise Gratien",
+        "titre-parcours": "Parcours – Louise Gratien",
+        "label-nav": "Navigation principale",
+        "alt-logo": "Louise Gratien, accueil",
+        "alt-photo": "Photo de Louise Gratien",
+        "alt-mvc": "Capture d'écran du mini-framework MVC en PHP",
+        "alt-bde": "Logo du projet BDE404",
+        "alt-cv": "Capture d'écran du CV en HTML/CSS",
+        "alt-portfolio": "Capture d'écran de ce portfolio",
         // textes présents sur plusieurs pages
         "commun-mon-cv": "Mon CV",
         "commun-mobilite": "Mobilité",
@@ -120,11 +131,22 @@ const traductions = {
         "nav-parcours": "Background",
         "footer-terminal": "Secret terminal",
         "footer-mentions": "Legal notice",
-        // textes écrits par le JS (étapes 5a et 5b)
+        // textes écrits par le JS (bouton thème, label du burger)
         "theme-sombre": "dark mode",
         "theme-clair": "light mode",
         "menu-ouvrir": "Open menu",
         "menu-fermer": "Close menu",
+        // titres des onglets et textes cachés dans les attributs (aria-label, alt)
+        "titre-index": "Louise Gratien – Web developer",
+        "titre-projets": "Projects – Louise Gratien",
+        "titre-parcours": "Background – Louise Gratien",
+        "label-nav": "Main navigation",
+        "alt-logo": "Louise Gratien, home",
+        "alt-photo": "Photo of Louise Gratien",
+        "alt-mvc": "Screenshot of the PHP MVC mini-framework",
+        "alt-bde": "BDE404 project logo",
+        "alt-cv": "Screenshot of the HTML/CSS CV",
+        "alt-portfolio": "Screenshot of this portfolio",
         // textes présents sur plusieurs pages
         "commun-mon-cv": "My CV",
         "commun-mobilite": "Location",
